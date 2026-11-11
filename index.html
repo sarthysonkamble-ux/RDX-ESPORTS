@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171d17">
+  <title>RDX Esports | Player Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo">RDX</div>
+      <div class="brand-info">
+        <h1>RDX ESPORTS</h1>
+        <p>PLAYER COMMAND CENTER</p>
+      </div>
+    </div>
+    <div class="status-tag">
+      <span class="status-dot"></span>
+      FREE TOURNAMENTS
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- LOGIN / SIGNUP -->
+    <section id="authScreen" class="card auth-card">
+      <div class="section-label">PLAYER ACCESS</div>
+      <h2>WELCOME, PLAYER</h2>
+      <p class="muted">Login to access your tournament dashboard.</p>
+
+      <label for="email">EMAIL ADDRESS</label>
+      <input
+        id="email"
+        type="email"
+        placeholder="Enter your email"
+        autocomplete="email"
+      >
+
+      <label for="password">PASSWORD</label>
+      <input
+        id="password"
+        type="password"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+      >
+
+      <div class="auth-buttons">
+        <button class="btn-primary" onclick="login()">LOGIN</button>
+        <button class="btn-secondary" onclick="signup()">CREATE ACCOUNT</button>
+      </div>
+
+      <p id="authMessage" class="message"></p>
+      <p class="small-note">RDX ESPORTS • PLAYER REGISTRATION SYSTEM</p>
+    </section>
+
+
+    <!-- PLAYER DASHBOARD -->
+    <section id="playerPanel" style="display:none;">
+
+      <!-- WELCOME -->
+      <div class="hero-card">
+        <div>
+          <div class="section-label">PLAYER DASHBOARD</div>
+          <h2>WELCOME TO RDX</h2>
+          <p id="playerUsername" class="player-name"></p>
+          <p class="muted">Your tournaments. Your matches. Your progress.</p>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn-secondary" onclick="refreshDashboard()">
+            ↻ REFRESH
+          </button>
+          <button class="btn-danger" onclick="logout()">
+            LOGOUT
+          </button>
+        </div>
+      </div>
+
+
+      <!-- TOURNAMENTS -->
+      <section class="dashboard-section">
+        <div class="section-heading">
+          <div>
+            <div class="section-label">COMPETE</div>
+            <h2>AVAILABLE TOURNAMENTS</h2>
+          </div>
+          <span class="section-icon">🏆</span>
+        </div>
+
+        <div id="tournamentsList">
+          Loading tournaments...
+        </div>
+      </section>
+
+
+      <!-- REGISTRATION FORM -->
+      <section id="registerForm" class="card registration-card"
+        style="display:none;">
+
+        <div class="section-label">JOIN MATCH</div>
+        <h2>TOURNAMENT REGISTRATION</h2>
+
+        <p id="selectedTournament" class="muted"></p>
+
+        <label for="playerGameName">FREE FIRE NAME</label>
+        <input
+          type="text"
+          id="playerGameName"
+          placeholder="Enter your in-game name"
+        >
+
+        <label for="playerGameUID">FREE FIRE UID</label>
+        <input
+          type="text"
+          id="playerGameUID"
+          placeholder="Enter your game UID"
+          inputmode="numeric"
+        >
+
+        <div class="auth-buttons">
+          <button class="btn-primary" onclick="confirmRegistration()">
+            CONFIRM REGISTRATION
+          </button>
+          <button class="btn-secondary" onclick="closeRegisterForm()">
+            CANCEL
+          </button>
+        </div>
+
+        <p id="registerMessage" class="message"></p>
+      </section>
+
+
+      <!-- MY REGISTRATIONS -->
+      <section class="dashboard-section">
+        <div class="section-heading">
+          <div>
+            <div class="section-label">YOUR ACTIVITY</div>
+            <h2>MY REGISTRATIONS</h2>
+          </div>
+          <span class="section-icon">📋</span>
+        </div>
+
+        <div id="myRegistrations">
+          Loading registrations...
+        </div>
+      </section>
+
+
+      <!-- ANNOUNCEMENTS -->
+      <section class="dashboard-section">
+        <div class="section-heading">
+          <div>
+            <div class="section-label">LATEST UPDATES</div>
+            <h2>ANNOUNCEMENTS</h2>
+          </div>
+          <span class="section-icon">📢</span>
+        </div>
+
+        <div id="announcementsList">
+          Loading announcements...
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+
+
+  <footer class="footer">
+    <h3>RDX ESPORTS</h3>
+    <p>COMPETE • IMPROVE • DOMINATE</p>
+    <small>© 2026 RDX Esports. All rights reserved.</small>
+  </footer>
+
+
+  <!-- SUPABASE CONNECTION -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL =
+      "https://rlsqsccsjrekuyhsrdaq.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_XHbEFehfVieVnHY4BSIY8A_2nTpFfVA";
+
+    window.db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+  </script>
+
+  <!-- EXISTING PROJECT SCRIPTS -->
+  <script src="script.js?v=4"></script>
+  <script src="room.js"></script>
+  <script src="profile.js?v=3"></script>
+
+</body>
+</html>
